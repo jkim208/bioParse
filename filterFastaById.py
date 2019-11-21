@@ -10,9 +10,9 @@ import argparse  # command line options
 #               I need to find these ids in the clustered reads fasta and remove them.
 
 
+# Process fasta file by filtering out records matching target IDs of interest and recording the remaining records
 def process_fasta(in_fasta, out, target):
-    # Process fasta file by filtering out records matching target IDs of interest and recording the remaining records
-    write_seq = False
+    write_seq = False  # Declare boolean that switches if a record id matches the target IDs
     with open(out, 'w') as outfile:
         with open(in_fasta, 'r') as f:
             for count, line in enumerate(f):  # Read line by line while keeping track of line number
@@ -30,9 +30,9 @@ def process_fasta(in_fasta, out, target):
     return
 
 
+# Read in target file containing record ids and save as a list
 def read_target_file(target):
-    # Read in target file containing record ids and save as a list
-    target_ids = []
+    target_ids = []  # Declare list that will hold the target record ids
     with open(target, 'r') as target_fh:
         for target_id in target_fh:
             target_ids.append(target_id.rstrip())  # Each line in the target file is an id. Save these ids.
@@ -41,7 +41,6 @@ def read_target_file(target):
 
 
 def main():
-    # Main function
     parser = argparse.ArgumentParser(description='')
     required_group = parser.add_argument_group('required arguments')
     required_group.add_argument("-fasta", help='Fasta with clustered reads and their ids', required=True, metavar='')
